@@ -1,4 +1,4 @@
-"""Sensitivity visualisation for resource estimates."""
+"""Sensitivity visualization for resource estimates."""
 
 from __future__ import annotations
 

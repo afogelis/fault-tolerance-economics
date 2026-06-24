@@ -139,7 +139,7 @@ The estimate combines three published ingredients:
 3. **Runtime.** Runtime is the Toffoli count times a per-Toffoli time, calibrated so the baseline
    matches the ~8-hour figure of Gidney & Ekera (2021).
 
-All numeric inputs are modelling assumptions, stated explicitly so the estimate can be re-derived
+All numeric inputs are modeling assumptions, stated explicitly so the estimate can be re-derived
 or updated as hardware improves.
 
 ## Estimates across hardware profiles
@@ -159,8 +159,8 @@ infeasible (the rate approaching threshold).
 
 - The suppression-law prefactor and threshold are heuristics; a faithful estimate would use a
   decoder-specific threshold measured by the companion simulator and benchmark repos.
-- Magic-state distillation is modelled as a flat tile multiplier rather than an explicit factory
-  layout; real layouts (Gidney & Ekera 2021) optimise distillation in detail.
+- Magic-state distillation is modeled as a flat tile multiplier rather than an explicit factory
+  layout; real layouts (Gidney & Ekera 2021) optimize distillation in detail.
 - The runtime model is calibrated to a single published point and assumes a reaction-limited
   architecture.
 

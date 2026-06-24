@@ -30,7 +30,7 @@ class AlgorithmSpec(BaseModel):
     # Tile multiplier accounting for magic-state factories and routing space that
     # surround the data qubits in a real layout. Gidney-Ekera-style layouts spend
     # a large fraction of the footprint on distillation; ~2x of the data tiles is
-    # a common rule of thumb (modelling assumption, see report).
+    # a common rule of thumb (modeling assumption, see report).
     factory_tile_multiplier: float = Field(default=2.0, ge=1.0)
 
     def total_logical_tiles(self) -> float:

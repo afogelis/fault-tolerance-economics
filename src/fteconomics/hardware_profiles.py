@@ -4,7 +4,7 @@ Each profile captures the few physical parameters that dominate surface-code
 overhead: the physical (per-operation) error rate, the surface-code cycle time,
 and the assumed code threshold. Values are drawn from public roadmaps and
 papers and are deliberately conservative ranges, not vendor guarantees; every
-figure is a modelling assumption and is cited in the technical report.
+figure is a modeling assumption and is cited in the technical report.
 """
 
 from __future__ import annotations

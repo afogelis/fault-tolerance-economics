@@ -1,4 +1,4 @@
-"""Quantitative resource and cost modelling for fault-tolerant quantum computing."""
+"""Quantitative resource and cost modeling for fault-tolerant quantum computing."""
 
 from .algorithm_cost import SHOR_RSA_2048, AlgorithmSpec
 from .cost_model import ResourceEstimate, estimate_resources, sensitivity_sweep

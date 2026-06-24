@@ -12,13 +12,13 @@ The headline application answers a concrete strategic question:
 > assumptions?**
 
 This is **not new physics**: it is a clean, auditable re-derivation of a published estimate with the
-modelling assumptions made explicit, plus the sensitivity analysis that the original headline number
+modeling assumptions made explicit, plus the sensitivity analysis that the original headline number
 does not show. This is repo 5 of a seven-part
 [QEC research portfolio](https://github.com/afogelis/qec-portfolio).
 
 ## What this demonstrates
 
-- **Quantitative modelling and forecasting:** propagating physical assumptions through the surface-code suppression law to a physical-qubit and runtime budget.
+- **Quantitative modeling and forecasting:** propagating physical assumptions through the surface-code suppression law to a physical-qubit and runtime budget.
 - **Sensitivity / scenario analysis:** identifying which hardware parameter (the physical error rate) dominates the cost, and by how much.
 - **Strategy translation:** turning a physics result into a decision-ready estimate with explicit assumptions and citations - the kind of analysis a research-operations or TPM role values.
 
@@ -32,11 +32,11 @@ full report, profile comparison and sensitivity tables.
 
 ![Sensitivity of the physical-qubit estimate to each input assumption (tornado chart).](docs/sensitivity.png)
 
-*Sensitivity of the physical-qubit budget to each modelling assumption. The physical error rate dominates because it enters the required code distance exponentially.*
+*Sensitivity of the physical-qubit budget to each modeling assumption. The physical error rate dominates because it enters the required code distance exponentially.*
 
 ## The 2012 → 2019 → 2025 frontier
 
-Reproducing one number is a calculator; modelling how the estimate has *moved* is analysis. Under
+Reproducing one number is a calculator; modeling how the estimate has *moved* is analysis. Under
 **identical** hardware assumptions (0.1% gate error, 1 µs cycle, 10 µs reaction), Gidney (2025,
 arXiv:2505.15917) lowers the requirement to **under one million physical qubits in under a week** —
 a **~20× reduction** from the 2019 figure this repo reproduces from first principles.
@@ -71,7 +71,7 @@ fteconomics report --output reports/shor-rsa2048-resource-estimate.md
 2. **Surface-code overhead** (Fowler et al. 2012): `p_L(d) ~ 0.1 (p / p_th)^((d+1)/2)`; a total error budget fixes the distance, and a rotated patch uses `2 d^2 - 1` physical qubits.
 3. **Runtime**: Toffoli count times a per-Toffoli time, calibrated so the baseline matches the published ~8-hour figure.
 
-All numeric inputs are explicit modelling assumptions; the physical error rate is the dominant
+All numeric inputs are explicit modeling assumptions; the physical error rate is the dominant
 lever because it enters the distance requirement exponentially.
 
 ## Layout
