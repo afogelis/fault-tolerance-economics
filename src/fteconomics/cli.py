@@ -13,6 +13,11 @@ from collections.abc import Sequence
 
 from .algorithm_cost import SHOR_RSA_2048
 from .cost_model import estimate_resources
+from .frontier import (
+    HISTORICAL_ESTIMATES,
+    gidney2025_breakdown,
+    qubit_reduction_factor,
+)
 from .hardware_profiles import DEFAULT_PROFILES
 from .report import write_report
 
@@ -37,6 +42,18 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_frontier(_args: argparse.Namespace) -> int:
+    bd = gidney2025_breakdown()
+    print(f"2019 -> 2025 physical-qubit reduction: {qubit_reduction_factor():.0f}x")
+    for est in HISTORICAL_ESTIMATES:
+        print(f"  {est.year}  {est.physical_qubits:.0e} qubits  ({est.label})")
+    print(
+        f"2025 breakdown: cold={bd.cold_storage_qubits:,} + hot={bd.hot_storage_qubits:,} + "
+        f"compute={bd.compute_region_qubits:,} = {bd.total:,} physical qubits"
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="fteconomics", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -48,6 +65,9 @@ def build_parser() -> argparse.ArgumentParser:
     report = sub.add_parser("report", help="Generate the markdown technical report.")
     report.add_argument("--output", default="reports/shor-rsa2048-resource-estimate.md")
     report.set_defaults(func=_cmd_report)
+
+    frontier = sub.add_parser("frontier", help="Print the 2012->2019->2025 cost frontier.")
+    frontier.set_defaults(func=_cmd_frontier)
     return parser
 
 

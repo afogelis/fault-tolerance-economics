@@ -7,6 +7,7 @@ from matplotlib.axes import Axes
 
 from .algorithm_cost import AlgorithmSpec
 from .cost_model import sensitivity_sweep
+from .frontier import HISTORICAL_ESTIMATES, PublishedEstimate
 from .hardware_profiles import HardwareProfile
 
 
@@ -38,4 +39,39 @@ def plot_sensitivity(
     ax.set_title("Resource sensitivity to hardware parameters")
     ax.legend()
     ax.grid(True, which="both", alpha=0.3)
+    return ax
+
+
+def plot_qubit_frontier(
+    estimates: tuple[PublishedEstimate, ...] = HISTORICAL_ESTIMATES,
+    *,
+    ax: Axes | None = None,
+) -> Axes:
+    """Plot the historical physical-qubit cost of factoring RSA-2048 over time.
+
+    The y-axis is logarithmic because successive estimates have fallen by orders
+    of magnitude: ~1 billion qubits (2012), ~20 million (2019), ~1 million (2025).
+    """
+    if ax is None:
+        _, ax = plt.subplots(figsize=(7, 5))
+
+    years = [e.year for e in estimates]
+    qubits = [e.physical_qubits for e in estimates]
+    ax.plot(years, qubits, marker="o", color="#c0392b", linewidth=2)
+
+    for est in estimates:
+        ax.annotate(
+            f"{est.physical_qubits:.0e}\n{est.label}",
+            (est.year, est.physical_qubits),
+            textcoords="offset points",
+            xytext=(8, 6),
+            fontsize=8,
+        )
+
+    ax.set_yscale("log")
+    ax.set_xlabel("Year of estimate")
+    ax.set_ylabel("Physical qubits to factor RSA-2048")
+    ax.set_title("Falling cost of quantum factoring (comparable assumptions)")
+    ax.grid(True, which="both", alpha=0.3)
+    ax.margins(x=0.18)
     return ax

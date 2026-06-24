@@ -30,6 +30,24 @@ full report, profile comparison and sensitivity tables.
 
 *Sensitivity of the physical-qubit budget to each modelling assumption. The physical error rate dominates because it enters the required code distance exponentially.*
 
+## The 2012 → 2019 → 2025 frontier
+
+Reproducing one number is a calculator; modelling how the estimate has *moved* is analysis. Under
+**identical** hardware assumptions (0.1% gate error, 1 µs cycle, 10 µs reaction), Gidney (2025,
+arXiv:2505.15917) lowers the requirement to **under one million physical qubits in under a week** —
+a **~20× reduction** from the 2019 figure this repo reproduces from first principles.
+
+![Historical physical-qubit cost of factoring RSA-2048: ~1e9 (2012), ~2e7 (2019), ~1e6 (2025), log scale.](docs/frontier.png)
+
+*Falling cost of quantum factoring under comparable assumptions.*
+
+The 2025 headline is **reconstructed from its published components** rather than re-derived with the
+uniform-patch model — cold (yoked) storage `1280 × 430` + hot storage `131 × 1352` + compute
+`126 × 1352` = **897,864** physical qubits (the paper rounds up to 1,000,000 for slack). The repo
+attributes the 20× reduction to its three enabling techniques: **approximate residue arithmetic**
+(fewer logical qubits), **yoked surface codes** (≈3× denser idle storage), and **magic state
+cultivation** (smaller distillation factories). Run `fteconomics frontier` to print it.
+
 ## Install and run
 
 ```bash
@@ -64,9 +82,12 @@ lever because it enters the distance requirement exponentially.
 
 ## References
 
+- Chevignard C, Fouque P-A, Schrottenloher A. Reducing the Number of Qubits in Quantum Factoring. Cryptology ePrint Archive, Paper 2024/222, 2024.
 - Fowler AG, Mariantoni M, Martinis JM, Cleland AN. Surface codes: Towards practical large-scale quantum computation. Physical Review A 2012; 86:032324.
+- Gidney C. How to factor 2048 bit RSA integers with less than a million noisy qubits. arXiv:2505.15917, 2025.
 - Gidney C, Ekera M. How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits. Quantum 2021; 5:433.
-- Google Quantum AI. Suppressing quantum errors by scaling a surface code logical qubit. Nature 2023; 614:676-681.
+- Gidney C, Newman M, Brooks P, Jones C. Yoked surface codes. Nature Communications 2025.
+- Gidney C, Shutty N, Jones C. Magic state cultivation: growing T states as cheap as CNOT gates. arXiv:2409.17595, 2024.
 
 ## License
 

@@ -6,6 +6,14 @@ from pathlib import Path
 
 from .algorithm_cost import SHOR_RSA_2048, AlgorithmSpec
 from .cost_model import ResourceEstimate, estimate_resources, sensitivity_sweep
+from .frontier import (
+    GIDNEY_2025_TOFFOLI_COUNT,
+    HISTORICAL_ESTIMATES,
+    REDUCTION_LEVERS,
+    PublishedEstimate,
+    gidney2025_breakdown,
+    qubit_reduction_factor,
+)
 from .hardware_profiles import DEFAULT_PROFILES, HardwareProfile
 
 
@@ -29,6 +37,58 @@ def _profile_table(algorithm: AlgorithmSpec, profiles: dict[str, HardwareProfile
             f"{est.runtime_hours:.1f} |"
         )
     return "\n".join(rows)
+
+
+def _frontier_section() -> str:
+    bd = gidney2025_breakdown()
+    factor = qubit_reduction_factor()
+
+    def _row(e: PublishedEstimate) -> str:
+        runtime = f"{e.runtime_hours:.0f}" if e.runtime_hours else "n/a"
+        logical = f"{e.logical_qubits:,}" if e.logical_qubits else "n/a"
+        toffoli = f"{e.toffoli_count:.1e}" if e.toffoli_count else "n/a"
+        return (
+            f"| {e.year} | {e.label} | {e.physical_qubits:.0e} | "
+            f"{runtime} | {logical} | {toffoli} |"
+        )
+
+    rows = "\n".join(_row(e) for e in HISTORICAL_ESTIMATES)
+    levers = "\n".join(
+        f"- **{lever.name}.** {lever.effect} ({lever.citation})" for lever in REDUCTION_LEVERS
+    )
+
+    return f"""## The 2012 -> 2019 -> 2025 frontier
+
+The first-principles estimate above reproduces the **2019** Gidney-Ekera figure. The cost has since
+fallen sharply. Under *identical* hardware assumptions (0.1% gate error, 1 us cycle, 10 us reaction
+time), Gidney (2025) lowers the requirement to **under one million physical qubits** in **under a
+week** -- a **{factor:.0f}x** reduction in qubit count relative to 2019.
+
+| Year | Estimate | Physical qubits | Runtime (h) | Logical qubits | Toffolis |
+|------|----------|-----------------|-------------|----------------|----------|
+{rows}
+
+### Reconstructing the 2025 headline from its components
+
+The 2025 layout splits qubits across three regions; summing the reported component costs reproduces
+the headline number (the paper rounds 897,864 up to 1,000,000 for slack):
+
+| Region | Logical qubits | Physical / logical | Physical qubits |
+|--------|----------------|--------------------|-----------------|
+| Cold storage (yoked) | 1,280 | 430 | {bd.cold_storage_qubits:,} |
+| Hot storage (d=25) | 131 | 1,352 | {bd.hot_storage_qubits:,} |
+| Compute (6 factories + workspace) | 126 patches | 1,352 | {bd.compute_region_qubits:,} |
+| **Total** | | | **{bd.total:,}** |
+
+The Toffoli count rises to ~{GIDNEY_2025_TOFFOLI_COUNT:.1e} (from ~3e9 in 2019), which is why the
+runtime grows from hours to days even as the qubit count collapses -- a deliberate space-for-time
+trade.
+
+### What drives the {factor:.0f}x reduction
+
+{levers}
+
+"""
 
 
 def _sensitivity_section(algorithm: AlgorithmSpec, hardware: HardwareProfile) -> str:
@@ -86,6 +146,7 @@ or updated as hardware improves.
 
 {_profile_table(algorithm, DEFAULT_PROFILES)}
 
+{_frontier_section()}
 ## Sensitivity analysis
 
 The physical error rate is the dominant lever: it enters the required distance exponentially, so a
@@ -105,14 +166,22 @@ infeasible (the rate approaching threshold).
 
 ## References
 
+Chevignard C, Fouque P-A, Schrottenloher A. Reducing the Number of Qubits in Quantum Factoring.
+Cryptology ePrint Archive, Paper 2024/222, 2024.
+
 Fowler AG, Mariantoni M, Martinis JM, Cleland AN. Surface codes: Towards practical large-scale
 quantum computation. Physical Review A 2012; 86:032324.
+
+Gidney C. How to factor 2048 bit RSA integers with less than a million noisy qubits.
+arXiv:2505.15917, 2025.
 
 Gidney C, Ekera M. How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits.
 Quantum 2021; 5:433.
 
-Google Quantum AI. Suppressing quantum errors by scaling a surface code logical qubit. Nature 2023;
-614:676-681.
+Gidney C, Newman M, Brooks P, Jones C. Yoked surface codes. Nature Communications 2025.
+
+Gidney C, Shutty N, Jones C. Magic state cultivation: growing T states as cheap as CNOT gates.
+arXiv:2409.17595, 2024.
 """
 
 
