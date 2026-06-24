@@ -1,16 +1,20 @@
 # Fault-Tolerance Economics
 
-A transparent resource and cost model for fault-tolerant quantum computing. Given a hardware
-profile (physical error rate, surface-code cycle time, threshold) and an algorithm's logical
-requirements, it estimates the **physical qubits**, **runtime** and **cost** needed to run the
-computation under realistic error-correction overhead.
+A transparent **reproduction and sensitivity analysis** of the Gidney & Ekera (2021) resource
+estimate for fault-tolerant quantum computing. Given a hardware profile (physical error rate,
+surface-code cycle time, threshold) and an algorithm's logical requirements, it re-derives the
+**physical qubits**, **runtime** and **cost** needed to run the computation under realistic
+error-correction overhead, and then sweeps each assumption to show what drives the answer.
 
 The headline application answers a concrete strategic question:
 
 > **How many physical qubits are needed to run Shor's algorithm on RSA-2048 under realistic error
 > assumptions?**
 
-This is repo 5 of a seven-part [QEC research portfolio](https://github.com/afogelis/qec-portfolio).
+This is **not new physics**: it is a clean, auditable re-derivation of a published estimate with the
+modelling assumptions made explicit, plus the sensitivity analysis that the original headline number
+does not show. This is repo 5 of a seven-part
+[QEC research portfolio](https://github.com/afogelis/qec-portfolio).
 
 ## What this demonstrates
 
