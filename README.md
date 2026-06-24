@@ -10,7 +10,7 @@ The headline application answers a concrete strategic question:
 > **How many physical qubits are needed to run Shor's algorithm on RSA-2048 under realistic error
 > assumptions?**
 
-This is repo 5 of a seven-part [QEC research portfolio](../README.md).
+This is repo 5 of a seven-part [QEC research portfolio](https://github.com/afogelis/qec-portfolio).
 
 ## What this demonstrates
 
@@ -25,6 +25,10 @@ Calibrated to reproduce Gidney & Ekera (2021), the baseline superconducting prof
 **d ~ 27-29**, running for about **8 hours**. See
 [`reports/shor-rsa2048-resource-estimate.md`](reports/shor-rsa2048-resource-estimate.md) for the
 full report, profile comparison and sensitivity tables.
+
+![Sensitivity of the physical-qubit estimate to each input assumption (tornado chart).](docs/sensitivity.png)
+
+*Sensitivity of the physical-qubit budget to each modelling assumption. The physical error rate dominates because it enters the required code distance exponentially.*
 
 ## Install and run
 
