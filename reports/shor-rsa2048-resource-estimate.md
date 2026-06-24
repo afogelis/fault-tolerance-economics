@@ -2,7 +2,7 @@
 
 A resource estimate for Shor's algorithm under realistic surface-code error correction.
 
-## Headline answer
+## Summary
 
 Under the superconducting baseline (physical error rate 1e-03,
 1000 ns surface-code cycle, 1% threshold), factoring a 2048-bit RSA modulus
@@ -51,10 +51,10 @@ week** -- a **20x** reduction in qubit count relative to 2019.
 | 2019 | Gidney & Ekera (2019/2021) | 2e+07 | 8 | 6,200 | 3.0e+09 |
 | 2025 | Gidney (2025) | 1e+06 | 118 | 1,409 | 6.5e+09 |
 
-### Reconstructing the 2025 headline from its components
+### Reconstructing the 2025 estimate from its components
 
 The 2025 layout splits qubits across three regions; summing the reported component costs reproduces
-the headline number (the paper rounds 897,864 up to 1,000,000 for slack):
+the published estimate (the paper rounds 897,864 up to 1,000,000 for slack):
 
 | Region | Logical qubits | Physical / logical | Physical qubits |
 |--------|----------------|--------------------|-----------------|

@@ -1,28 +1,28 @@
 # Fault-Tolerance Economics
 
-A transparent **reproduction and sensitivity analysis** of the Gidney & Ekera (2021) resource
+A **reproduction and sensitivity analysis** of the Gidney & Ekera (2021) resource
 estimate for fault-tolerant quantum computing. Given a hardware profile (physical error rate,
 surface-code cycle time, threshold) and an algorithm's logical requirements, it re-derives the
 **physical qubits**, **runtime** and **cost** needed to run the computation under realistic
 error-correction overhead, and then sweeps each assumption to show what drives the answer.
 
-The headline application answers a concrete strategic question:
+The application answers a concrete question:
 
 > **How many physical qubits are needed to run Shor's algorithm on RSA-2048 under realistic error
 > assumptions?**
 
-This is **not new physics**: it is a clean, auditable re-derivation of a published estimate with the
-modeling assumptions made explicit, plus the sensitivity analysis that the original headline number
-does not show. This is repo 5 of a ten-part
+This is **not new physics**: it is an auditable re-derivation of a published estimate with the
+modeling assumptions made explicit, plus a sensitivity analysis of the published estimate. This is
+repo 5 of a ten-part
 [QEC research portfolio](https://github.com/afogelis/qec-portfolio).
 
-## What this demonstrates
+## Scope
 
 - **Quantitative modeling and forecasting:** propagating physical assumptions through the surface-code suppression law to a physical-qubit and runtime budget.
 - **Sensitivity / scenario analysis:** identifying which hardware parameter (the physical error rate) dominates the cost, and by how much.
-- **Strategy translation:** turning a physics result into a decision-ready estimate with explicit assumptions and citations - the kind of analysis a research-operations or TPM role values.
+- **Strategy translation:** turning a physics result into a resource estimate with explicit assumptions and citations.
 
-## Headline result
+## Result
 
 Calibrated to reproduce Gidney & Ekera (2021), the baseline superconducting profile
 (p = 1e-3, 1 us cycle, 1% threshold) yields roughly **20 million physical qubits** at code distance
@@ -36,7 +36,7 @@ full report, profile comparison and sensitivity tables.
 
 ## The 2012 → 2019 → 2025 frontier
 
-Reproducing one number is a calculator; modeling how the estimate has *moved* is analysis. Under
+Beyond a single number, the model tracks how the estimate has *moved* across published years. Under
 **identical** hardware assumptions (0.1% gate error, 1 µs cycle, 10 µs reaction), Gidney (2025,
 arXiv:2505.15917) lowers the requirement to **under one million physical qubits in under a week** —
 a **~20× reduction** from the 2019 figure this repo reproduces from first principles.
@@ -45,7 +45,7 @@ a **~20× reduction** from the 2019 figure this repo reproduces from first princ
 
 *Falling cost of quantum factoring under comparable assumptions.*
 
-The 2025 headline is **reconstructed from its published components** rather than re-derived with the
+The 2025 estimate is **reconstructed from its published components** rather than re-derived with the
 uniform-patch model — cold (yoked) storage `1280 × 430` + hot storage `131 × 1352` + compute
 `126 × 1352` = **897,864** physical qubits (the paper rounds up to 1,000,000 for slack). The repo
 attributes the 20× reduction to its three enabling techniques: **approximate residue arithmetic**

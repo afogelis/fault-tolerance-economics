@@ -68,10 +68,10 @@ week** -- a **{factor:.0f}x** reduction in qubit count relative to 2019.
 |------|----------|-----------------|-------------|----------------|----------|
 {rows}
 
-### Reconstructing the 2025 headline from its components
+### Reconstructing the 2025 estimate from its components
 
 The 2025 layout splits qubits across three regions; summing the reported component costs reproduces
-the headline number (the paper rounds 897,864 up to 1,000,000 for slack):
+the published estimate (the paper rounds 897,864 up to 1,000,000 for slack):
 
 | Region | Logical qubits | Physical / logical | Physical qubits |
 |--------|----------------|--------------------|-----------------|
@@ -114,7 +114,7 @@ def build_report(algorithm: AlgorithmSpec = SHOR_RSA_2048) -> str:
 
 A resource estimate for Shor's algorithm under realistic surface-code error correction.
 
-## Headline answer
+## Summary
 
 Under the superconducting baseline (physical error rate {baseline.physical_error_rate:.0e},
 {baseline.cycle_time_ns:.0f} ns surface-code cycle, 1% threshold), factoring a 2048-bit RSA modulus
