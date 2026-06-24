@@ -13,7 +13,7 @@ The headline application answers a concrete strategic question:
 
 This is **not new physics**: it is a clean, auditable re-derivation of a published estimate with the
 modeling assumptions made explicit, plus the sensitivity analysis that the original headline number
-does not show. This is repo 5 of a seven-part
+does not show. This is repo 5 of a ten-part
 [QEC research portfolio](https://github.com/afogelis/qec-portfolio).
 
 ## What this demonstrates
