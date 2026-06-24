@@ -21,8 +21,12 @@ class AlgorithmSpec(BaseModel):
 
     name: str
     problem_size_bits: int = Field(..., gt=0)
-    logical_qubits: int = Field(..., gt=0, description="Algorithmic (data + routing) logical qubits.")
-    toffoli_count: float = Field(..., gt=0, description="Number of Toffoli (equiv. magic-state) gates.")
+    logical_qubits: int = Field(
+        ..., gt=0, description="Algorithmic (data + routing) logical qubits."
+    )
+    toffoli_count: float = Field(
+        ..., gt=0, description="Number of Toffoli (equiv. magic-state) gates."
+    )
     # Tile multiplier accounting for magic-state factories and routing space that
     # surround the data qubits in a real layout. Gidney-Ekera-style layouts spend
     # a large fraction of the footprint on distillation; ~2x of the data tiles is

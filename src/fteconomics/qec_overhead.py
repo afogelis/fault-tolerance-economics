@@ -16,8 +16,9 @@ from __future__ import annotations
 import math
 
 
-def logical_error_per_cycle(distance: int, physical_error_rate: float, *,
-                            threshold: float = 0.01, prefactor: float = 0.1) -> float:
+def logical_error_per_cycle(
+    distance: int, physical_error_rate: float, *, threshold: float = 0.01, prefactor: float = 0.1
+) -> float:
     """Return the heuristic logical error rate per cycle for one patch."""
     if distance < 1:
         raise ValueError("distance must be >= 1")
@@ -25,9 +26,14 @@ def logical_error_per_cycle(distance: int, physical_error_rate: float, *,
     return prefactor * ratio ** ((distance + 1) / 2.0)
 
 
-def required_distance(target_error_per_cycle: float, physical_error_rate: float, *,
-                      threshold: float = 0.01, prefactor: float = 0.1,
-                      max_distance: int = 101) -> int:
+def required_distance(
+    target_error_per_cycle: float,
+    physical_error_rate: float,
+    *,
+    threshold: float = 0.01,
+    prefactor: float = 0.1,
+    max_distance: int = 101,
+) -> int:
     """Smallest odd distance whose per-cycle logical error meets the target.
 
     Guard clauses reject a physical rate at or above threshold (where no finite
@@ -39,8 +45,12 @@ def required_distance(target_error_per_cycle: float, physical_error_rate: float,
         raise ValueError("target_error_per_cycle must be positive")
 
     for distance in range(3, max_distance + 1, 2):
-        if logical_error_per_cycle(distance, physical_error_rate,
-                                   threshold=threshold, prefactor=prefactor) <= target_error_per_cycle:
+        if (
+            logical_error_per_cycle(
+                distance, physical_error_rate, threshold=threshold, prefactor=prefactor
+            )
+            <= target_error_per_cycle
+        ):
             return distance
     raise ValueError(f"no distance <= {max_distance} meets the target error budget")
 
@@ -52,8 +62,13 @@ def physical_qubits_per_patch(distance: int) -> int:
     return 2 * distance * distance - 1
 
 
-def analytic_distance(target_error_per_cycle: float, physical_error_rate: float, *,
-                      threshold: float = 0.01, prefactor: float = 0.1) -> float:
+def analytic_distance(
+    target_error_per_cycle: float,
+    physical_error_rate: float,
+    *,
+    threshold: float = 0.01,
+    prefactor: float = 0.1,
+) -> float:
     """Continuous (non-rounded) distance from inverting the suppression law.
 
     Useful for sensitivity analysis where a smooth response is preferable to the

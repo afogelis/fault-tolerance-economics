@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Fault-Tolerance Economics"
+abstract: "Quantitative resource and cost modelling for fault-tolerant quantum computing, including a Shor / RSA-2048 physical-qubit estimate."
+type: software
+authors:
+  - family-names: "Fogelis"
+    given-names: "Andrew"
+version: "0.1.0"
+date-released: "2026-06-23"
+license: MIT
+repository-code: "https://github.com/afogelis/fault-tolerance-economics"
+keywords:
+  - quantum-error-correction
+  - resource-estimation
+  - shor
+  - surface-code
+  - fault-tolerance

@@ -116,7 +116,9 @@ Google Quantum AI. Suppressing quantum errors by scaling a surface code logical 
 """
 
 
-def write_report(out_path: str | Path, algorithm: AlgorithmSpec = SHOR_RSA_2048) -> ResourceEstimate:
+def write_report(
+    out_path: str | Path, algorithm: AlgorithmSpec = SHOR_RSA_2048
+) -> ResourceEstimate:
     """Write the markdown report to ``out_path`` and return the baseline estimate."""
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)

@@ -18,9 +18,13 @@ class HardwareProfile(BaseModel):
     model_config = {"frozen": True}
 
     name: str
-    physical_error_rate: float = Field(..., gt=0.0, lt=0.5, description="Per-operation error rate p.")
+    physical_error_rate: float = Field(
+        ..., gt=0.0, lt=0.5, description="Per-operation error rate p."
+    )
     cycle_time_ns: float = Field(..., gt=0.0, description="Time for one surface-code round (ns).")
-    code_threshold: float = Field(default=0.01, gt=0.0, lt=0.5, description="Assumed threshold p_th.")
+    code_threshold: float = Field(
+        default=0.01, gt=0.0, lt=0.5, description="Assumed threshold p_th."
+    )
     usd_per_physical_qubit_hour: float = Field(
         default=0.0, ge=0.0, description="Optional cost assumption ($ per physical qubit-hour)."
     )

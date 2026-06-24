@@ -49,7 +49,9 @@ def test_lower_error_rate_reduces_qubits():
 
 
 def test_sensitivity_sweep_returns_points():
-    sweep = sensitivity_sweep(SHOR_RSA_2048, DEFAULT_PROFILES["baseline"], parameter="cycle_time_ns")
+    sweep = sensitivity_sweep(
+        SHOR_RSA_2048, DEFAULT_PROFILES["baseline"], parameter="cycle_time_ns"
+    )
     assert len(sweep) >= 3
     # Halving the cycle time should roughly halve the runtime.
     runtimes = {m: est.runtime_hours for m, est in sweep}

@@ -19,7 +19,9 @@ from .report import write_report
 
 def _cmd_estimate(args: argparse.Namespace) -> int:
     if args.profile not in DEFAULT_PROFILES:
-        raise SystemExit(f"unknown profile '{args.profile}'; choose from {sorted(DEFAULT_PROFILES)}")
+        raise SystemExit(
+            f"unknown profile '{args.profile}'; choose from {sorted(DEFAULT_PROFILES)}"
+        )
     estimate = estimate_resources(SHOR_RSA_2048, DEFAULT_PROFILES[args.profile])
     print(estimate.model_dump_json(indent=2))
     return 0
@@ -28,8 +30,10 @@ def _cmd_estimate(args: argparse.Namespace) -> int:
 def _cmd_report(args: argparse.Namespace) -> int:
     estimate = write_report(args.output)
     print(f"wrote report to {args.output}")
-    print(f"baseline: {estimate.total_physical_qubits:,} physical qubits, "
-          f"d={estimate.code_distance}, {estimate.runtime_hours:.1f} h")
+    print(
+        f"baseline: {estimate.total_physical_qubits:,} physical qubits, "
+        f"d={estimate.code_distance}, {estimate.runtime_hours:.1f} h"
+    )
     return 0
 
 
